@@ -1,0 +1,5 @@
+node_modules/
+.env
+public/homework/*
+public/notices/*
+face_recognition/

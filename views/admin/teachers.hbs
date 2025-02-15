@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | IEMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">IEMS</span>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="/admin"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+
+                    </li>
+                    <li>
+                        <a href="/admin/student"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Students</a>
+                    </li>
+                    <li>
+                        <a href="/admin/teacher" aria-current="page"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500">Teachers</a>
+                    </li>
+                    <li>
+                        <a href="/admin/notice/add"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Notice</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="bg-blue-50 dark:bg-gray-900">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            {{students}}
+
+            <div
+                class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-6xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 id="toggleFormBtn"
+                        class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Add New Teacher
+                    </h1>
+                    <form id="editForm" class="space-y-4 md:space-y-6 hidden" action="/admin/add/teacher" method="post">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label for="first-name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+                                    Name</label>
+                                <input type="text" name="fname" id="fname"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter First Name" value="{{formData.fname}}">
+                            </div>
+                            <div>
+                                <label for="surname"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                <input type="text" name="sname" id="sname"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter Surname" value="{{formData.sname}}" required>
+                            </div>
+                            <div>
+                                <label for="father-name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Father
+                                    Name</label>
+                                <input type="text" name="fathername" id="fathername"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter Father Name" value="{{formData.fathername}}" required>
+                            </div>
+                            <div>
+                                <label for="mother-name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mother
+                                    Name</label>
+                                <input type="text" name="mothername" id="mothername"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter Mother Name" value="{{formData.mothername}}" required>
+                            </div>
+
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label for="mnum1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number
+                                    1</label>
+                                <input type="text" name="mnum" id="mnum1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="" value="{{formData.mnum}}" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="address"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                            <input type="text" name="address" id="address"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="" value="{{formData.address}}" required>
+                        </div>
+                        <p class="mb-2 text-red-500 font-medium {{error}}">UID already exists</p>
+
+                        <button id="add-btn"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ADD</button>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="w-full rounded-lg shadow border md:mt-4 sm:max-w-6xl xl:p-0 bg-gray-800 border-gray-700 overflow-scroll">
+                <table id="student-table" class="w-full text-sm text-left text-white">
+                    <thead class="text-xs uppercase bg-gray-700 text-white">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">First Name</th>
+                            <th scope="col" class="py-3 px-6">Surname</th>
+                            <th scope="col" class="py-3 px-6">UID</th>
+                            <th scope="col" class="py-3 px-6">Mobile Number</th>
+                            <th scope="col" class="py-3 px-6"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table-body">
+                        {{#each teachers}}
+                        <tr>
+                            <td scope="col" class="py-3 px-6">{{this.fname}}</td>
+                            <td scope="col" class="py-3 px-6">{{this.sname}}</td>
+                            <td scope="col" class="py-3 px-6">{{this.uid}}</td>
+                            <td scope="col" class="py-3 px-6">{{this.mnum}}</td>
+                            <td scope="col" class="py-3 px-6">
+                                <form method="post" action="/admin/delete/teacher">
+                                    <button id="del-btn" value="{{this.uid}}" name='uid'
+                                        class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-800">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        document.getElementById('toggleFormBtn').addEventListener('click', function () {
+            const form = document.getElementById('editForm');
+            form.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+
+</html>

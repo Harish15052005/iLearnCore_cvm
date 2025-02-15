@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #111827;
+            /* Tailwind gray-900 */
+            --bg-secondary: #1f2937;
+            /* Tailwind gray-800 */
+            --text-primary: #ffffff;
+            /* White */
+            --text-secondary: #d1d5db;
+            /* Tailwind gray-300 */
+            --text-hover: #3b82f6;
+            /* Tailwind blue-500 */
+            --border-color: #374151;
+            /* Tailwind gray-700 */
+            --dropdown-bg: #1f2937;
+            /* Tailwind gray-800 */
+            --dropdown-hover: #374151;
+            /* Tailwind gray-700 */
+        }
+    </style>
+
+
+</head>
+
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)] h-full">
+
+    <nav class="bg-[var(--bg-primary)] border-[var(--border-color)]">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="/" class="flex items-center space-x-3">
+                <span
+                    class="self-center text-2xl font-semibold whitespace-nowrap text-[var(--text-primary)]">iLearnCore</span>
+            </a>
+
+            <div class="flex items-center md:order-2 space-x-3">
+                <!-- User Avatar Dropdown -->
+                <button type="button"
+                    class="flex text-sm bg-[var(--bg-secondary)] rounded-full focus:ring-4 focus:ring-[var(--border-color)]"
+                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full" src="https://randomuser.me/api/portraits/men/45.jpg"
+                        alt="user photo">
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-50 hidden my-4 text-base list-none bg-[var(--dropdown-bg)] divide-y divide-[var(--border-color)] rounded-lg shadow-sm"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-[var(--text-primary)]">{{user.fname}} {{user.sname}}</span>
+                        <span class="block text-sm text-[var(--text-secondary)] truncate">{{user.uname}}</span>
+                    </div>
+                    <ul class="py-2">
+                        <li><a href="/profile"
+                                class="block px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--dropdown-hover)]">Profile</a>
+                        </li>
+                        <li><a href="changePassword"
+                                class="block px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--dropdown-hover)]">Change
+                                Password</a>
+                        </li>
+                        <li><a href="/logout"
+                                class="block px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--dropdown-hover)]">Log
+                                Out</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- Mobile Menu Button -->
+                <button data-collapse-toggle="navbar-user" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-[var(--text-secondary)] rounded-lg md:hidden hover:bg-[var(--border-color)]"
+                    aria-controls="navbar-user" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+                <ul
+                    class="flex flex-col font-medium p-4 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)] md:space-x-8 md:flex-row md:border-0">
+                    <li><a href="/admin"
+                            class="block py-2 px-3 text-[var(--text-primary)] bg-[var(--text-hover)] rounded-sm">Home</a>
+                    </li>
+                    <li><a href="/admin/student"
+                            class="block py-2 px-3 text-[var(--text-primary)] rounded-sm hover:bg-[var(--border-color)]">Student</a>
+                    </li>
+                    <li><a href="/admin/teacher"
+                            class="block py-2 px-3 text-[var(--text-primary)] rounded-sm hover:bg-[var(--border-color)]">Teacher</a>
+                    </li>
+                    <li><a href="/admin/notice/view"
+                            class="block py-2 px-3 text-[var(--text-primary)] rounded-sm hover:bg-[var(--border-color)]">Notice
+                            Board</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form class="w-[50%] mx-auto rounded-xl border-solid border-4 p-4 mt-6" method="post" action="/admin/notice/add" 
+              enctype="multipart/form-data">
+
+        <div class="mb-6">
+            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notice Title</label>
+            <input type="text" name="title" id="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                 required />
+        </div>
+        <div class="mb-6">
+            <label for="details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notice
+                Details</label>
+            <textarea id="message" rows="4" name="details"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Write Notice Details"></textarea>
+        </div>
+        <div class="mb-6">
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                    </svg>
+                </div>
+                <input id="datepicker-actions" datepicker datepicker-buttons datepicker-autoselect-today type="text"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Select date" name="date" required>
+            </div>
+        </div>
+        <div class="mb-6">
+
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="noticeFile">Upload
+                file</label>
+            <input
+                class="p-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                id="file_input" name="noticeFile" type="file" accept=".pdf,.jpg,.png,.jpeg">
+
+        </div>
+        <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+
+
+</body>
+
+</html>
